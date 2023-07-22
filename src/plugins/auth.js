@@ -5,20 +5,20 @@ const authPlugin = async (fastify, _options) => {
     const header = request.headers?.authorization;
 
     if (!header) {
-      return reply.send(401, 'No authorization header provided');
+      return reply.code(401).send('No authorization header provided');
     }
 
     const [type, token] = header.split(' ');
 
     if (type !== 'Basic' || !token) {
-      return reply.send(401, 'Invalid token provided');
+      return reply.code(401).send('Invalid token provided');
     }
 
     const decodedToken = Buffer.from(token, 'base64').toString('utf-8');
     const [username, password] = decodedToken.split(':');
 
     if (!username || !password) {
-      return reply.send(401, 'Invalid token provided');
+      return reply.code(401).send('Invalid token provided');
     }
 
     const client = await fastify.prisma.client.findFirst({
@@ -26,7 +26,7 @@ const authPlugin = async (fastify, _options) => {
     });
 
     if (!client) {
-      return reply.send(401, 'Unauthorized');
+      return reply.code(401).send('Unauthorized');
     }
   });
 };
