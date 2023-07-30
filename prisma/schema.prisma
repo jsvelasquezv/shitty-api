@@ -19,3 +19,13 @@ model Client {
   createdBy String   @db.VarChar(255)
   password  String   @db.VarChar(255)
 }
+
+model User {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  username  String    @db.VarChar(255)
+  birthday  DateTime?
+  bdDay     Int?
+  bdMonth   Int?
+}

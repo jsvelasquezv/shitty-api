@@ -1,5 +1,6 @@
 const fastify = require('fastify')({ logger: true });
 const { exchangeRoutes } = require('./routes/exchange');
+const { usersRoutes } = require('./routes/users');
 const prismaPlugin = require('./plugins/prisma');
 const authPlugin = require('./plugins/auth');
 
@@ -14,6 +15,7 @@ fastify.register(prismaPlugin);
 fastify.register(async function authenticatedRoutes(childInstance) {
   childInstance.register(authPlugin);
   childInstance.register(exchangeRoutes);
+  childInstance.register(usersRoutes);
 });
 
 fastify.listen({ port: 8080, host: '0.0.0.0' }, (err) => {
