@@ -16,7 +16,7 @@
     "dayjs": "^1.11.9",
     "fastify": "^4.20.0",
     "fastify-plugin": "^4.5.1",
-    "playwright-chromium": "^1.36.1"
+    "jsdom": "^22.1.0"
   },
   "devDependencies": {
     "prisma": "^5.0.0"

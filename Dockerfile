@@ -1,6 +1,4 @@
-# FROM node:lts
-
-FROM zenika/alpine-chrome:with-playwright
+FROM node:lts-slim
 
 USER root
 WORKDIR /app
@@ -12,6 +10,7 @@ COPY .env .env
 
 ENV NODE_ENV=production
 
+RUN apt-get update -y && apt-get install -y openssl
 RUN npm install -g pnpm
 
 RUN pnpm install
